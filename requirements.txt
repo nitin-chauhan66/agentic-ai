@@ -1,0 +1,8 @@
+unstructured[pdf]
+tqdm
+google-genai
+python-dotenv
+opensearch-py
+gradio==5.34.2
+langchain==0.3.26
+groq
