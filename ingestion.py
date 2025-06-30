@@ -175,8 +175,11 @@ def ingest_all_content_into_opensearch(image_chunks = None, table_chunks = None,
             client = client, 
             chunks = image_chunks,
             index_name = index_name)
-    # if table_chunks:
-    #     ingest_chunks_into_opensearch(client, table_chunks, index_name)
+    if table_chunks:
+        ingest_chunks_into_opensearch(
+            client = client,
+            chunks = table_chunks,
+            index_name = index_name)
     if text_chunks:
         ingest_chunks_into_opensearch(client = client,
         index_name=index_name,
@@ -186,11 +189,16 @@ if __name__ == "__main__":
     from helper import *
     processed_image_chunks = load_chunks_from_cache_file(json_output_image_chunks_path)
     image_chunks = prepare_chunks_for_ingestion(processed_image_chunks)
+
+    processed_table_chunks = load_chunks_from_cache_file(json_output_table_chunks_path)
+    table_chunks = prepare_chunks_for_ingestion(processed_table_chunks)
+
     processed_text_chunks = load_chunks_from_cache_file(json_output_text_chunks_path)
     text_chunks = prepare_chunks_for_ingestion(processed_text_chunks)
     ingest_all_content_into_opensearch(
         text_chunks = text_chunks,
         image_chunks = image_chunks,
+        table_chunks = table_chunks,
         index_name="localrag")
 
 

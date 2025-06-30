@@ -26,7 +26,18 @@ def process_query_normal(query, search_type, model_type):
 
 
 # Create Gradio interface
-with gr.Blocks(title="LocalRAG Q&A System", theme="soft") as demo:
+with gr.Blocks(title="LocalRAG Q&A System", theme="soft", css="""
+    .custom-md-box {
+        height: 60vh; 
+        overflow-y: auto;
+    }
+    .box-border {
+        border: 2px solid #4A90E2;
+        padding: 16px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+""") as demo:
     gr.Markdown("# 📚 LocalRAG Q&A System")
     gr.Markdown(
         "Ask questions about the RAG paper and get answers using RAG technology!"
@@ -63,8 +74,8 @@ with gr.Blocks(title="LocalRAG Q&A System", theme="soft") as demo:
 
             submit_btn = gr.Button("Generate Answer", variant="primary")
 
-        with gr.Column(scale=2):
-            output = gr.Textbox(label="Answer", lines=20)
+        with gr.Column(scale=2, elem_classes="box-border"):
+            output = gr.Markdown(value="Answer", elem_classes="custom-md-box")
 
     # Handle form submission based on streaming preference
     def on_submit(query, search_type, model_type, stream):

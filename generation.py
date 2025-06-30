@@ -222,11 +222,11 @@ def generate_rag_response(
 # For testing
 if __name__ == "__main__":
     # Test both streaming and non-streaming
-    query = "Who is Current?"
+    query = "Get Information from balance sheet and tell what the net profit and cash flow"
 
     # Test streaming
     print("Response: ", end="", flush=True)
-    for chunk in generate_rag_response(query, "hybrid", 3, "gemini", True):
+    for chunk in generate_rag_response(query, "semantic", 20, "gemini", True):
         print(chunk, end="", flush=True)
 
     # Generating streaming response with Ollama
