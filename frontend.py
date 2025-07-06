@@ -60,7 +60,7 @@ with gr.Blocks(title="LocalRAG Q&A System", theme="soft", css="""
                 )
 
                 model_type = gr.Radio(
-                    ["gemini", "ollama"],
+                    ["gemini"],
                     label="AI Model",
                     value="gemini",
                     info="Select which model generates your answer",
@@ -99,45 +99,6 @@ with gr.Blocks(title="LocalRAG Q&A System", theme="soft", css="""
         inputs=[query_input, search_type, model_type, stream_checkbox],
         outputs=output,
         show_progress="minimal",  # Add this for visual feedback
-    )
-
-    # Add example questions
-    gr.Examples(
-        examples=[
-            ["How does RAG work?", "hybrid", "gemini", True],
-            [
-                "What are the benefits of RAG compared to fine-tuning?",
-                "semantic",
-                "gemini",
-                True,
-            ],
-            ["Explain RAG architecture with diagrams", "hybrid", "ollama", True],
-            [
-                "What are common challenges in RAG implementations?",
-                "keyword",
-                "gemini",
-                False,
-            ],
-        ],
-        inputs=[query_input, search_type, model_type, stream_checkbox],
-    )
-
-    gr.Markdown(
-        """
-    ### 📘 How to use this system:
-    
-    1. **Enter your question** about Retrieval-Augmented Generation (RAG)
-    2. Choose a **search method**:
-       - **Keyword**: Traditional text search
-       - **Semantic**: Meaning-based search using embeddings
-       - **Hybrid**: Combines keyword and semantic search
-    3. Select an **AI model**:
-       - **Gemini**: Google's Gemini 1.5 Flash model (requires API key)
-       - **Ollama**: Local Deepseek model running via Ollama
-    4. Toggle **streaming** to see the response generated in real-time
-    
-    The system will retrieve relevant information from the indexed RAG paper and generate a comprehensive answer based on that information.
-    """
     )
 
 # Launch the app
